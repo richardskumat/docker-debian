@@ -4,10 +4,10 @@ services: docker
 env:
   global:
     - DOCKER_USER: qwe1
-    - DOCKER_IMAGE: docker-centos
+    - DOCKER_IMAGE: docker-debian
     - GITLAB_REG_URL: registry.gitlab.com
     - GITLAB_REG_USER: richardskumat
-    - GITLAB_REG_IMAGE: docker-centos
+    - GITLAB_REG_IMAGE: docker-debian
   #matrix:
   #  - whatever
 
