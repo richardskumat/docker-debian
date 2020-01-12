@@ -32,9 +32,11 @@ push_to_dockerhub:
    # put the build commands in this script instead of messing with the yaml nesting mess >
    # https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html
    - sh docker-build.sh
-   - docker images
+   - docker images | grep "$CI_REGISTRY_IMAGE" | awk '{print $1":"$2}' > /tmp/images
+   - docker images | grep "$DOCKERHUB_USER/$DOCKERHUB_PROJECT" | awk '{print $1":"$2}' >> /tmp/images
    # there's no way in hell I'm going to push one by one by hand
-   - for tag in "$(grep "\-\t" docker-build.sh | awk '{print $2}')";do docker push "${tag}";done
+   #- for tag in "$(grep "\-\t" docker-build.sh | awk '{print $2}')";do docker push "${tag}";done
+   - while read -r var;do docker push "${var}";done < /tmp/images
 
 test_docker_images:
   stage: test
