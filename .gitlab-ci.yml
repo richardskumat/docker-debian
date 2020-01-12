@@ -19,10 +19,7 @@ build:
   stage: build
   script:
     # https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
-    - docker build -f Dockerfile-d9 -t d9 .
-    - docker build -f Dockerfile-d9nf -t d9nf .
-    - docker build -f Dockerfile-d10 -t d10 .
-    - docker build -f Dockerfile-d10nf -t d10nf .
+    - sh docker-build.sh
     - docker images
 
 push_to_dockerhub:

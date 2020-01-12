@@ -8,6 +8,9 @@ own ansible roles.
 This image is based on the official [Debian images](https://hub.docker.com/_/debian)
 on Dockerhub. These images use the slim versions as base images.
 
+This repo will supersede debian-nonfree on [Gitlab](https://gitlab.com/richardskumat/debian-nonfree),
+[Github](https://github.com/richardskumat/debian-nonfree) and [Dockerhub](https://hub.docker.com/r/qwe1/debian-nonfree).
+
 ## Links to source code and build logs
 
 Gitlab
