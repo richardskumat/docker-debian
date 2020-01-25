@@ -1,9 +1,8 @@
 #!/bin/sh
 # use this script to build the docker images with tags
-
-export DOCKERHUB_USER=qwe1
-export DOCKERHUB_PROJECT=docker-debian
-export CI_REGISTRY_IMAGE=registry.gitlab.com/richardskumat/docker-debian
+# this is really dumb, must be a better way to build
+# many tags/images from a script without manual
+# definition
 
 # plain d9
 docker build -f Dockerfile-d9 \

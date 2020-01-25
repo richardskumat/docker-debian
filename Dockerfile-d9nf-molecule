@@ -1,5 +1,13 @@
-FROM qwe1/docker-debian:9-nonfree
+FROM debian:stretch-slim
+
+RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
 RUN apt-get update && \
-    apt-get install -y python sudo bash ca-certificates lsb-release && \
+    apt-get install -y python sudo bash ca-certificates lsb-release systemd && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* && \
     apt-get clean
+
+VOLUME ["/sys/fs/cgroup"]
+CMD ["/lib/systemd/systemd"]
