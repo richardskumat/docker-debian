@@ -1,7 +1,7 @@
 FROM debian:stretch-slim
 
 RUN apt-get update && \
-    apt-get install -y python sudo bash ca-certificates lsb-release systemd && \
+    apt-get install -y python3-minimal sudo bash ca-certificates lsb-release systemd && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* && \
     apt-get clean
 
