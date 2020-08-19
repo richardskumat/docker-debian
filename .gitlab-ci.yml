@@ -32,17 +32,10 @@ build:
   script:
     # https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
     - sh docker-build.sh
-    - docker images
 
 push_to_dockerhub:
  stage: push
  only:
    - master
  script:
-   - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USER" --password-stdin
-   - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
-   # put the build commands in this script instead of messing with the yaml nesting mess >
-   # https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html
-   - sh docker-build.sh
-   - docker images | grep "$DOCKERHUB_USER/$DOCKERHUB_PROJECT" | awk '{print $1":"$2}' >> /tmp/images
-   - while read -r var;do docker push "${var}";done < /tmp/images
+   - sh docker-push.sh
