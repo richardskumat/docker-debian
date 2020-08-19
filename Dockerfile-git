@@ -1,6 +1,6 @@
 FROM debian:buster-slim
 
 RUN apt-get update && \
-    apt-get install -y git && \
+    apt-get install --no-install-recommends -y wget curl git ca-certificates && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* && \
     apt-get clean
