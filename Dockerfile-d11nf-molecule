@@ -5,6 +5,9 @@ RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list \
     && apt-get clean
 
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y wget curl git ca-certificates && \
+    apt-get install -y python3-minimal sudo bash ca-certificates lsb-release systemd && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* && \
     apt-get clean
+
+VOLUME ["/sys/fs/cgroup"]
+CMD ["/lib/systemd/systemd"]
