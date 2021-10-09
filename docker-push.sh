@@ -23,7 +23,7 @@ docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:10-nonfree-molecule cat /etc/
 # d11 with molecule dependencies and contrib & nonfree repos
 docker build \
 -f Dockerfile-d11nf-molecule \
--t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11-molecule
+-t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11-molecule \
 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11-nonfree-molecule \
 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:bullseye-nonfree-molecule \
 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:bullseye-slim-nonfree-molecule .
