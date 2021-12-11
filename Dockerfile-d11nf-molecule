@@ -1,11 +1,11 @@
-FROM debian:bullseye-slim
+FROM debian:bullseye
 
 RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
 RUN apt-get update && \
-    apt-get install -y python3-minimal sudo bash ca-certificates lsb-release systemd && \
+    apt-get install -y python3-minimal sudo bash ca-certificates lsb-release systemd iproute2 && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* && \
     apt-get clean
 
