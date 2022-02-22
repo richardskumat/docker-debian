@@ -5,9 +5,19 @@ RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list \
     && apt-get clean
 
 RUN apt-get update && \
-    apt-get install -y python3-minimal sudo bash ca-certificates lsb-release systemd iproute2 && \
-    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* && \
+    apt-get install -y python3-minimal sudo bash ca-certificates lsb-release systemd systemd-sysv iproute2 && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* /tmp/* /var/tmp/* && \
     apt-get clean
+
+RUN rm -f /lib/systemd/system/multi-user.target.wants/* \
+/etc/systemd/system/*.wants/* \
+/lib/systemd/system/local-fs.target.wants/* \
+/lib/systemd/system/sockets.target.wants/*udev* \
+/lib/systemd/system/sockets.target.wants/*initctl* \
+/lib/systemd/system/basic.target.wants/* \
+/lib/systemd/system/anaconda.target.wants/* \
+/lib/systemd/system/plymouth* \
+/lib/systemd/system/systemd-update-utmp*
 
 VOLUME ["/sys/fs/cgroup"]
 CMD ["/lib/systemd/systemd"]
