@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:buster-slim
 
 RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list \
     && rm -rf /var/lib/apt/lists/* \

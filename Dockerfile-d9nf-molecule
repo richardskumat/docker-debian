@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:stretch-slim
 
 RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list \
     && rm -rf /var/lib/apt/lists/* \
@@ -6,7 +6,7 @@ RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list \
 
 RUN apt-get update && \
     apt-get install -y python3-minimal sudo bash ca-certificates lsb-release systemd && \
-    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* /tmp/* /var/tmp/* && \
     apt-get clean
 
 VOLUME ["/sys/fs/cgroup"]
