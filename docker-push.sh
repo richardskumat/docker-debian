@@ -1,7 +1,9 @@
 #!/bin/sh
 
 # d9 with molecule dependencies and contrib & nonfree repos
-docker build \
+docker buildx build \
+--push \
+--platform linux/amd64,linux/arm/v7,linux/arm64 \
 -f Dockerfile-d9nf-molecule \
 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:9-molecule \
 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:9-nonfree-molecule \
@@ -11,7 +13,9 @@ docker build \
 docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:9-nonfree-molecule cat /etc/os-release
 
 # d10 with molecule dependencies and contrib & nonfree repos
-docker build \
+docker buildx build \
+--push \
+--platform linux/amd64,linux/arm/v7,linux/arm64 \
 -f Dockerfile-d10nf-molecule \
 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:10-molecule \
 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:10-nonfree-molecule \
@@ -21,7 +25,9 @@ docker build \
 docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:10-nonfree-molecule cat /etc/os-release
 
 # d11 with molecule dependencies and contrib & nonfree repos
-docker build \
+docker buildx build \
+--push \
+--platform linux/amd64,linux/arm/v7,linux/arm64 \
 -f Dockerfile-d11nf-molecule \
 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11-molecule \
 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11-nonfree-molecule \
@@ -31,7 +37,9 @@ docker build \
 docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11-nonfree-molecule cat /etc/os-release
 
 # git tag for git cloning in ci images
-docker build \
+docker buildx build \
+--push \
+--platform linux/amd64,linux/arm/v7,linux/arm64 \
 -f Dockerfile-git \
 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:git .
 
