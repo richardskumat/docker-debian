@@ -41,16 +41,6 @@ build:
   script:
     # https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
     # - docker buildx build --push -t qwe1/playground:latest -t qwe1/playground:$CI_COMMIT_SHORT_SHA -f Dockerfile --platform linux/amd64,linux/arm/v7,linux/arm64 .
-    - docker buildx build --load -f Dockerfile -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:$CI_COMMIT_SHA  --platform linux/amd64 .
-    - docker buildx build --load -f Df-root -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:$CI_COMMIT_SHA-root -f Df-root --platform linux/amd64 .
-    - docker images
-    - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:$CI_COMMIT_SHA pelican --version
-    - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:$CI_COMMIT_SHA-root pelican --version
-
-build:
-  stage: build
-  script:
-    # https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
     - sh docker-build.sh
 
 push_to_dockerhub:
