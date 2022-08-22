@@ -1,0 +1,12 @@
+FROM debian:bullseye-slim
+
+RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+RUN apt-get update && \
+    apt-get install -y python3-minimal sudo bash ca-certificates lsb-release dumb-init iproute2 && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* /tmp/* /var/tmp/* && \
+    apt-get clean
+
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]

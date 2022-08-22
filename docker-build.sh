@@ -30,6 +30,16 @@ docker buildx build --load \
 
 docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11-nonfree-molecule cat /etc/os-release
 
+# d11 with molecule dependencies & dumb-init and contrib & nonfree repos
+docker buildx build --load \
+--platform linux/amd64 \
+-f Dockerfile-d11nf-dumbinit \
+-t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11-dumbinit \
+-t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:bullseye-dumbinit \
+-t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:bullseye-slim-dumbinit .
+
+docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11-dumbinit cat /etc/os-release
+
 # git tag for git cloning in ci images
 docker buildx build --load \
 --platform linux/amd64 \
