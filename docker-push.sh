@@ -37,7 +37,8 @@ docker buildx build \
 docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11-nonfree-molecule cat /etc/os-release
 
 # d11 with molecule dependencies & dumb-init and contrib & nonfree repos
-docker buildx build --load \
+docker buildx build \
+--push \
 --platform linux/amd64,linux/arm/v7,linux/arm64 \
 -f Dockerfile-d11nf-dumbinit \
 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11-dumbinit \
