@@ -19,5 +19,8 @@ RUN rm -f /lib/systemd/system/multi-user.target.wants/* \
 /lib/systemd/system/plymouth* \
 /lib/systemd/system/systemd-update-utmp*
 
-VOLUME ["/sys/fs/cgroup"]
-CMD ["/lib/systemd/systemd"]
+#VOLUME ["/sys/fs/cgroup"]
+#CMD ["/lib/systemd/systemd"]
+CMD [ "/lib/systemd/systemd", "log-level=info", "unit=sysinit.target" ]
+# https://github.com/geerlingguy/docker-debian11-ansible/issues/4
+# https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-unbound/blob/main/molecule/default/Dockerfile-debian-bullseye.j2
