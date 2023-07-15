@@ -40,6 +40,16 @@ docker buildx build --load \
 
 docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11-dumbinit cat /etc/os-release
 
+# d12 with molecule dependencies and contrib & nonfree repos
+docker buildx build --load \
+--platform linux/amd64 \
+-f Dockerfile-d12nf-molecule \
+-t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:12-nonfree-molecule \
+-t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:bookworm-nonfree-molecule \
+-t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:bookworm-slim-nonfree-molecule .
+
+docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:12-nonfree-molecule cat /etc/os-release
+
 # git tag for git cloning in ci images
 docker buildx build --load \
 --platform linux/amd64 \
