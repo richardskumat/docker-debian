@@ -1,0 +1,31 @@
+FROM debian:bookworm-slim
+
+# seems Bookworm(D12) ct images come with debian.sources
+# files in /etc/apt/sources.list.d
+# whereas manual installations have the old /etc/apt/sources.list files
+RUN rm -f /etc/apt/sources.list.d/debian.sources
+
+COPY extras/d12-sources.list /etc/apt/sources.list
+
+COPY extras/d12-no-bookworm-firmware.conf /etc/apt/apt.conf.d/no-bookworm-firmware.conf
+
+RUN apt-get update && \
+    apt-get install -y python3-minimal sudo bash ca-certificates lsb-release systemd systemd-sysv iproute2 && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* /tmp/* /var/tmp/* && \
+    apt-get clean
+
+RUN rm -f /lib/systemd/system/multi-user.target.wants/* \
+/etc/systemd/system/*.wants/* \
+/lib/systemd/system/local-fs.target.wants/* \
+/lib/systemd/system/sockets.target.wants/*udev* \
+/lib/systemd/system/sockets.target.wants/*initctl* \
+/lib/systemd/system/basic.target.wants/* \
+/lib/systemd/system/anaconda.target.wants/* \
+/lib/systemd/system/plymouth* \
+/lib/systemd/system/systemd-update-utmp*
+
+#VOLUME ["/sys/fs/cgroup"]
+#CMD ["/lib/systemd/systemd"]
+CMD [ "/lib/systemd/systemd", "log-level=info", "unit=sysinit.target" ]
+# https://github.com/geerlingguy/docker-debian11-ansible/issues/4
+# https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-role-unbound/blob/main/molecule/default/Dockerfile-debian-bullseye.j2
