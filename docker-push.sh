@@ -51,6 +51,7 @@ docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11-dumbinit cat /etc/os-relea
 docker buildx build --load \
 --platform linux/amd64,linux/arm/v7,linux/arm64 \
 -f Dockerfile-d12nf-molecule \
+-t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:12-molecule \
 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:12-nonfree-molecule \
 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:bookworm-nonfree-molecule \
 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:bookworm-slim-nonfree-molecule .
