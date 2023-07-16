@@ -20,20 +20,15 @@ Notes on some tags:
 **all tags**
 
 All tags use the slim versions of the respective
-debian release
+Debian release.
 
-**nonfree tags**
-
-these images have contrib and nonfree repos enabled for testing.
+All recently updated tags have contrib and non-free repos
+enabled.
 
 **molecule tags**
 
 these images have python installed so [molecule tests](https://github.com/ansible-community/molecule)
-use these tags
-
-**release version tags**
-
-these tags just use the upstream slim images without any modifications
+can use these tags.
 
 ## Links to source code and build logs
 
