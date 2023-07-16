@@ -1,15 +1,6 @@
 #!/bin/sh
-
-# d9 with molecule dependencies and contrib & nonfree repos
-docker buildx build --load \
---platform linux/amd64 \
--f Dockerfile-d9nf-molecule \
--t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:9-molecule \
--t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:9-nonfree-molecule \
--t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:stretch-nonfree-molecule \
--t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:stretch-slim-nonfree-molecule .
-
-docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:9-nonfree-molecule cat /etc/os-release
+export DOCKERHUB_USER="${DOCKERHUB_USER:-qwe1}"
+export DOCKERHUB_PROJECT="${DOCKERHUB_PROJECT:-docker-debian}"
 
 # d10 with molecule dependencies and contrib & nonfree repos
 docker buildx build --load \

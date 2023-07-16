@@ -1,14 +1,6 @@
 #!/bin/sh
-
-# d9 with molecule dependencies and contrib & nonfree repos
-docker buildx build \
---push \
---platform linux/amd64,linux/arm/v7,linux/arm64 \
--f Dockerfile-d9nf-molecule \
--t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:9-molecule \
--t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:9-nonfree-molecule \
--t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:stretch-nonfree-molecule \
--t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:stretch-slim-nonfree-molecule .
+export DOCKERHUB_USER="${DOCKERHUB_USER:-qwe1}"
+export DOCKERHUB_PROJECT="${DOCKERHUB_PROJECT:-docker-debian}"
 
 docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:9-nonfree-molecule cat /etc/os-release
 
@@ -48,7 +40,8 @@ docker buildx build \
 docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11-dumbinit cat /etc/os-release
 
 # d12 with molecule dependencies and contrib & nonfree repos
-docker buildx build --load \
+docker buildx build \
+--push \
 --platform linux/amd64,linux/arm/v7,linux/arm64 \
 -f Dockerfile-d12nf-molecule \
 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:12-molecule \
